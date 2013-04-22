@@ -24,9 +24,10 @@ If the user runs into the dynamite, which will move randomly yet slowly, the gam
 and the user will end up with however many points he or she has collected thus far. 
 
 The user will have three lives to start with. Gameplay only ends when the user loses his last life or runs
-into the dynamite. The goal is to get the most amount of points by the end of the game, which can be done 
-by collecting candy and/or the pot of gold. The game will speed up as gameplay goes on, until it becomes
-virtually impossible to play.
+into the dynamite. If the user loses a life, he will be reset at the starting position (bottom left corner)
+The goal is to get the most amount of points by the end of the game, which can be done by collecting candy 
+and/or the pot of gold. The game will speed up as gameplay goes on, until it becomes virtually impossible 
+to play.
 
 
 ###Objects
@@ -74,7 +75,30 @@ virtually impossible to play.
      
      ![alt text](http://tutorialqueen.com/wp-content/uploads/2009/04/photoshop-dinamite-logo-stock-photo28-thumb.jpg "Dynamite")
      
+###Graphical User Interface
+The following will show how the game will look at different stages: 
+
+  1. On the opening screen, the user will be able to enter his or her name and then press `Start` (the `Start` button can only
+     be pressed if the user has entered something in the text box. The user alternatively has the option to click a push 
+     button called `How to play the game` that creates a pop up window detailing how to play the game (see number 2). The 
+     image below illustrates this layout:
      
+     Oh hey
+     
+  2. Pop-up window showing how to play the game:
+  
+     oh hey
+     
+  3. After the user has pressed `Start`, a new scene will appear. On the top strip will be a `Pause` button on the far left
+     and a `Quit` button on the far right. In between these will be the user's name, followed by his score, followed by
+     the number of lives he has left. Below that will be the actual game play. Finally, the bottom strip will have a `Restart`
+     button that can be pushed at any time. This is shown below:
+     
+     Oh hey
+  
+  4. When the game ends, the user will be taken to a new screen that says Game Over at the top. Below that, it will show the
+     user's name, and below that will be the word Score: followed by the user's score. Below all of that will be a button that
+     says `Play again?` which will restart the game. This is shown here:
 
 
 
