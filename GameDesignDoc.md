@@ -60,7 +60,12 @@ virtually impossible to play.
      easily running into the candy again. The candy will be represented by this icon:
 
      ![alt text](http://www.clker.com/cliparts/9/c/2/c/11949863201080446347candy_02.svg.thumb.png "Candy")
-  6. Hey
+  6. Wall [Object 4 of 5]: This object will appear and **move** horizontally back and forth. The user cannot occupy the
+     space where the wall resides, nor can he pass right through it in any manner. Its only purpose is to create an
+     obstacle to the user's movement, as the user does not lose anything if he gets close to it. The wall will be
+    represented by the following icon: 
+
+  7. Dynamite
 
 
 
