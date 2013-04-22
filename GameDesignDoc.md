@@ -29,10 +29,14 @@ by collecting candy and/or the pot of gold. The game will speed up as gameplay g
 virtually impossible to play.
 
 
-##Objects
+###Objects
 **The following is a list of all objects in the game:**
 
-  1. Object 1
+  1. User [not counted as one of the five objects]: can be moved using the up, down, left, and right arrow keys on the keyboard. Will be represented by the following image:
+  
+  ![alt text](http://www.pixeljoint.com/files/icons/full/warrior_single_fn.gif "Player Icon")
+  2. Nothing
+  3. Hey
 
 
 
