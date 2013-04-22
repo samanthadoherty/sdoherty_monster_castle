@@ -15,7 +15,7 @@ be stationary at the top right corner of the board, worth five hundred points if
 relocated to the starting position, the bottom left corner, every time he collects the pot of gold.
 Two monsters will be "guarding" the gold, one moving vertically back and forth and the other, horizontally. 
 The user loses a life if he runs into either of these monsters. A wall will also be moving horizontally, 
-but there is not penalty if the user runs into it; it simply serves as an obstacle.
+but there is no penalty if the user runs into it; it simply serves as an obstacle.
 
 The user maneuvers himself using the up, down, left, and right arrows on the keyboard. The user can also 
 collect a slowly moving piece of candy for 100 points to rack up easier points. Once collected, the piece of
@@ -29,8 +29,12 @@ by collecting candy and/or the pot of gold. The game will speed up as gameplay g
 virtually impossible to play.
 
 
+##Objects
+**The following is a list of all objects in the game:**
 
-The following is a list of all objects in the game.
+  1. Object 1
+
+
 
 ```
 # Header 1
