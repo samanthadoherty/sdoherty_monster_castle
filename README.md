@@ -1,8 +1,8 @@
 # Game - Programming Assignments Private Repository
 ### Student Information
-  + Name: Tommy Trojan
-  + USC Email: ttrojan@usc.edu
-  + USC ID: 0123456789
+  + Name: Samantha Doherty
+  + USC Email: sdoherty@usc.edu
+  + USC ID: 8740938974
 
 ### Game Information
   + Game Name: myAwsomeGame
