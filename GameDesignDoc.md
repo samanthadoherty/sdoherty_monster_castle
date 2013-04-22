@@ -64,8 +64,17 @@ virtually impossible to play.
      space where the wall resides, nor can he pass right through it in any manner. Its only purpose is to create an
      obstacle to the user's movement, as the user does not lose anything if he gets close to it. The wall will be
     represented by the following icon: 
+    
+    ![alt text](http://www.iconfinder.com/icondetails/10574/24/red_wall_icon "Wall")
 
-  7. Dynamite
+  7. Dynamite [Object 5 of 5]: This object will appear and **move** randomly. If the user runs into it, the game will
+     immediately end, regardless of how many lives the user has left. The user will receive the score they have at the
+     moment they ran into the dynamite. This should not happen too often because the dynamite will be the slowest moving
+     object. The dynamite will be represented by the following image:
+     
+     ![alt text](http://tutorialqueen.com/wp-content/uploads/2009/04/photoshop-dinamite-logo-stock-photo28-thumb.jpg "Dynamite")
+     
+     
 
 
 
