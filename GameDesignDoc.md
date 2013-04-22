@@ -1,14 +1,13 @@
 # Game Design Document
-This is a place holder for your game design document. You are advised to write your document in [Markdown](http://daringfireball.net/projects/markdown/) and the following section will show you how to write a document using Markdown markup.
-
-Alternativley, you can write your document in plain text if you wish.
 
 ----
 
-## Markdown
-Markdown is a human-readable structured plain text format that is used to convert text into HTML. GitHub automatically renders Markdown into HTML.
-
-This is a crash course on how to use Markdown. The following section will show you the plain text used to generate the document shown in the rendering section.
+## Monster Kingdom: Quest for Gold
+Monster Kingdom: Quest for Gold is a game in which the user's goal is to collect as many pots of gold (worth 500 points) 
+and pieces of candy (worth 100 points) as possible. The catch is the user must dodge monsters, which cost the user one life,
+and dynamite, which--if run into--will cause the game to end, regardless of how many lives are left. A moving wall also 
+creates an obstacle for the player. The goal of the game is to collect the most amount of points before either lives run out
+or the game is terminated by running into dynamite.
 
 ### Code
 
