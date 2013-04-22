@@ -65,7 +65,7 @@ virtually impossible to play.
      obstacle to the user's movement, as the user does not lose anything if he gets close to it. The wall will be
     represented by the following icon: 
     
-    ![alt text](http://www.iconfinder.com/icondetails/10574/48/red_wall_icon "Wall")
+    ![alt text](http://cdn1.iconfinder.com/data/icons/Siena/48/wall%20red.png "Wall")
 
   7. Dynamite [Object 5 of 5]: This object will appear and **move** randomly. If the user runs into it, the game will
      immediately end, regardless of how many lives the user has left. The user will receive the score they have at the
