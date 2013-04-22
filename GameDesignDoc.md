@@ -33,28 +33,34 @@ virtually impossible to play.
 **The following is a list of all objects in the game:**
 
   1. User [not counted as one of the five objects]: can be moved using the up, down, left, and right arrow 
-    keys on the keyboard. Will be represented by the following image (which will be shrinked to fit game board scale:
+    keys on the keyboard. Will be represented by the following image (which will be shrinked to fit game board scale):
   
   ![alt text](http://www.pixeljoint.com/files/icons/full/warrior_single_fn.gif "Player Icon")
-  2. Horizontal Monster [Object 1 of 5]: When this monster appears, it will start to move horizontally back and forth
+  2. Horizontal Monster [Object 1 of 5]: When this monster appears, it will start to **move** horizontally back and forth
       at a location a few rows away from the stationary the pot of gold. If the user runs into the monster, the user
       will lose a life. This monster will be represented by the following image:
 
       ![alt text](http://files.softicons.com/download/animal-icons/monster-icons-by-spoongraphics/png/24x24/Green-Monster.png "Green Monster")
   3. Vertical Monster [not counted as one of the five objects since it is similar to #2]: When this monster appears,
-    it will move vertically up and down, a few columns away from the stationary pot of gold. Just like with the
+    it will **move** vertically up and down, a few columns away from the stationary pot of gold. Just like with the
     horizontal monster, if run into, it will cost the user one life. Together with the horizontal monster, it essentially
     "guards" the pot of gold and the user must time his moves perfectly to get past both monsters. The monster will be
     represented by the following image:
 
     ![alt text](http://files.softicons.com/download/animal-icons/monster-icons-by-spoongraphics/png/24x24/Blue-Monster.png "Blue Monster")
-  4. Pot of Gold [Object 2 of 5]: the pot of gold will appear in the very top right corner of the screen, where it will
-     remain the entire game. Every time the user passes over it, 500 points will be added to the user's score. The user
+  4. Pot of Gold [Object 2 of 5]: The pot of gold will appear in the very top right corner of the screen, where it will
+     remain **stationary** the entire game. Every time the user passes over it, 500 points will be added to the user's score. The user
      will also reappear at the bottom right corner, his starting point (this is to prevent the user from continually
-     passing over the gold to rack up the points. 
+     passing over the gold to rack up the points). This object will be represented by the following image, which will
+     obviously be resized to fit the game board scale:
 
      ![alt text](http://www.allfreelogo.com/images/vector-thumb/pot-of-gold-prev114054467117I6sP.jpg "Pot of Gold")
-  5. heyer
+  5. Candy [Object 3 of 5]: The candy will randomly appear and **move** randomly around the board. If the user runs into
+     it, the user will gain 100 points. The candy will then reappear in a random other location to prevent the user from
+     easily running into the candy again. The candy will be represented by this icon:
+
+     ![alt text](http://www.clker.com/cliparts/9/c/2/c/11949863201080446347candy_02.svg.thumb.png "Candy")
+  6. Hey
 
 
 
