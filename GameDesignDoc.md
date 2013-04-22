@@ -6,7 +6,7 @@
 Monster Kingdom: Quest for Gold is a game in which the user's goal is to collect as many pots of gold (worth 500 points) 
 and pieces of candy (worth 100 points) as possible. The catch is the user must dodge monsters, which cost the user one life,
 and dynamite, which--if run into--will cause the game to end, regardless of how many lives are left. A moving wall also 
-creates an obstacle for the player. The goal of the game is to collect the most amount of points before either lives run out
+creates an obstacle for the player. The goal of the game is to collect the most amount of points before the user's lives run out
 or the game is terminated by running into dynamite.
 
 ### Code
