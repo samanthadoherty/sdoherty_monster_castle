@@ -32,10 +32,14 @@ virtually impossible to play.
 ###Objects
 **The following is a list of all objects in the game:**
 
-  1. User [not counted as one of the five objects]: can be moved using the up, down, left, and right arrow keys on the keyboard. Will be represented by the following image:
+  1. User [not counted as one of the five objects]: can be moved using the up, down, left, and right arrow 
+    keys on the keyboard. Will be represented by the following image (which will be shrinked to fit game board scale:
   
   ![alt text](http://www.pixeljoint.com/files/icons/full/warrior_single_fn.gif "Player Icon")
-  2. Nothing
+  2. Horizontal Monster [Object 1]: When this monster appears, it will start to move horizontally back and forth
+      at a location a few rows away from the stationary the pot of gold. If the user runs into the monster, the user
+      will lose a life. This monster will be represented by the following image:
+      ![alt text](http://files.softicons.com/download/animal-icons/monster-icons-by-spoongraphics/png/24x24/Green-Monster.png "Green Monster")
   3. Hey
 
 
