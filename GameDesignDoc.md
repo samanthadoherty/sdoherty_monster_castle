@@ -10,55 +10,49 @@ goal of the game is to collect the most amount of points before the user's lives
 terminated by running into dynamite.
 
 ### General Gameplay
-To begin the game, the user will always start in the bottom left corner of the board. The pot of gold will 
-be stationary at the top right corner of the board, worth five hundred points if collected. The user will be
-relocated to the starting position, the bottom left corner, every time he collects the pot of gold.
-Two monsters will be "guarding" the gold, one moving vertically back and forth and the other, horizontally. 
-The user loses a life if he runs into either of these monsters. A wall will also be moving horizontally, 
-but there is no penalty if the user runs into it; it simply serves as an obstacle.
+To begin the game, the user will always start in the bottom center of the board. The player's main goal is 
+to collect the pot of gold, worth five hundred points.Two monsters will be "guarding" the gold, one moving 
+vertically back and forth and the other, horizontally. The user loses a life if he runs into either of these
+monsters. A wall will also be moving horizontally, but there is no penalty if the user runs into it; it simply
+serves as an obstacle.
 
-The user maneuvers himself using the up, down, left, and right arrows on the keyboard. The user can also 
+The user maneuvers himself using the left and right arrows on the keyboard. The user can also 
 collect a slowly moving piece of candy for 100 points to rack up easier points. Once collected, the piece of
-candy will reappear at a random other location to be collected again in the future if the user desires.
-If the user runs into the dynamite, which will move randomly yet slowly, the game will automatically end 
-and the user will end up with however many points he or she has collected thus far. 
+candy (and the pot of gold) will disappear and reappear at a random other location to be collected again in 
+the future if the user desires. If the user runs into the dynamite, which will move randomly yet slowly, the
+game will automatically end and the user will end up with however many points he or she has collected thus far. 
 
 The user will have three lives to start with. Gameplay only ends when the user loses his last life or runs
-into the dynamite. If the user loses a life, he will be reset at the starting position (bottom left corner)
-The goal is to get the most amount of points by the end of the game, which can be done by collecting candy 
-and/or the pot of gold. The game will speed up as gameplay goes on, until it becomes virtually impossible 
-to play.
+into the dynamite. If the user loses a life, he will be reset at the starting position. The goal is to get 
+the most amount of points by the end of the game, which can be done by collecting candy and/or the pot of gold. 
+The game will speed up as gameplay goes on, until it becomes virtually impossible to play.
 
 
 ###Objects
 **The following is a list of all objects in the game:**
 
-  1. User [not counted as one of the five objects]: can be moved using the up, down, left, and right arrow 
+  1. User [not counted as one of the five objects]: can be moved using left and right arrow 
     keys on the keyboard. Will be represented by the following image (which will be shrinked to fit game board scale):
   
   ![alt text](http://www.pixeljoint.com/files/icons/full/warrior_single_fn.gif "Player Icon")
-  2. Horizontal Monster [Object 1 of 5]: When this monster appears, it will start to **move** horizontally back and forth
-      at a location a few rows away from the stationary the pot of gold. If the user runs into the monster, the user
+  2. Horizontal Monster [Object 1 of 5]: When this monster appears, it will start to **move** horizontally back and forth. If the user runs into the monster, the user
       will lose a life. This monster will be represented by the following image:
 
       ![alt text](http://files.softicons.com/download/animal-icons/monster-icons-by-spoongraphics/png/24x24/Green-Monster.png "Green Monster")
   3. Vertical Monster [not counted as one of the five objects since it is similar to #2]: When this monster appears,
-    it will **move** vertically up and down, a few columns away from the stationary pot of gold. Just like with the
-    horizontal monster, if run into, it will cost the user one life. Together with the horizontal monster, it essentially
-    "guards" the pot of gold and the user must time his moves perfectly to get past both monsters. The monster will be
+    it will **move** vertically up and down. Just like with the
+    horizontal monster, if run into, it will cost the user one life. The monster will be
     represented by the following image:
 
     ![alt text](http://files.softicons.com/download/animal-icons/monster-icons-by-spoongraphics/png/24x24/Blue-Monster.png "Blue Monster")
-  4. Pot of Gold [Object 2 of 5]: The pot of gold will appear in the very top right corner of the screen, where it will
-     remain **stationary** the entire game. Every time the user passes over it, 500 points will be added to the user's score. The user
-     will also reappear at the bottom right corner, his starting point (this is to prevent the user from continually
-     passing over the gold to rack up the points). This object will be represented by the following image, which will
+  4. Pot of Gold [Object 2 of 5]: The pot of gold will appear and move randomly and quickly. Every time the user passes
+     over it, 500 points will be added to the user's score. This object will be represented by the following image, which will
      obviously be resized to fit the game board scale:
 
      ![alt text](http://www.allfreelogo.com/images/vector-thumb/pot-of-gold-prev114054467117I6sP.jpg "Pot of Gold")
   5. Candy [Object 3 of 5]: The candy will randomly appear and **move** randomly around the board. If the user runs into
-     it, the user will gain 100 points. The candy will then reappear in a random other location to prevent the user from
-     easily running into the candy again. The candy will be represented by this icon:
+     it, the user will gain 100 points. The candy will disappear when it is collected and reappear elsewhere later. 
+     The candy will be represented by this icon:
 
      ![alt text](http://www.clker.com/cliparts/9/c/2/c/11949863201080446347candy_02.svg.thumb.png "Candy")
   6. Wall [Object 4 of 5]: This object will appear and **move** horizontally back and forth. The user cannot occupy the
