@@ -2,8 +2,8 @@
 
 ----
 
-## Monster Kingdom: Quest for Gold
-Monster Kingdom: Quest for Gold is a game in which the user's goal is to collect as many pots of gold 
+## Monster Castle: Quest for Gold
+Monster Castle: Quest for Gold is a game in which the user's goal is to collect as many pots of gold 
 and pieces of candy as possible. The catch is the user must dodge monsters, which cost the user one life,
 and dynamite, which--if run into--will cause the game to end, regardless of how many lives are left. The 
 goal of the game is to collect the most amount of points before the user's lives run out or the game is 
