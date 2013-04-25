@@ -5,7 +5,7 @@
   + USC ID: 8740938974
 
 ### Game Information
-  + Game Name: Monster Kingdom: Quest for Gold
+  + Game Name: Monster Castle: Quest for Gold
   + Game Description: User dodges monsters and dynamite to collect candy and gold for points.
   + [Game Design Doc](GameDesignDoc.md)
 
