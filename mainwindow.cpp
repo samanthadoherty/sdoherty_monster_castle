@@ -8,16 +8,20 @@ using namespace std;
 
 MainWindow::MainWindow() 
 {
+   timer = new QTimer(this);
+   timer->setInterval(1000);
+   timer->start();
+   connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
    window = new QWidget();
    scene = new QGraphicsScene();
    view = new QGraphicsView( scene );
-   board = new Board(10, scene);
+   board = new Board(scene);
    view->setFixedSize(402, 402);
    
-  /* QLabel* myImage = new QLabel();
+   QLabel* myImage = new QLabel();
    QImage image("images/00911-Stone-Wall-Backdrop.jpg");
    myImage->setPixmap(QPixmap::fromImage(image));
-   scene->addWidget(myImage);*/
+   scene->addWidget(myImage);
 
    startLayout = new QHBoxLayout();
    bottomLayout = new QHBoxLayout();
@@ -28,11 +32,21 @@ MainWindow::MainWindow()
    window->setLayout(mainLayout);
    window->show();
    board->display();
+  // board->moveMonster();
+  // cout << "DISPLAY" << endl;
+   //board->display();
 }
 
 MainWindow::~MainWindow() {
    delete scene;
    delete view;
+}
+
+void MainWindow::handleTimer() {
+   cout << "Handle Timer" << endl;
+   qDeleteAll(scene->items());
+   board->moveMonster();
+   board->display();
 }
 
 void MainWindow::addPushButtons() {

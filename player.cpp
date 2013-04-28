@@ -4,8 +4,8 @@ using namespace std;
 
 Player::Player() {}
 
-Player::Player(int xLoc, int yLoc) 
-  : GamePiece(xLoc, yLoc) {
+Player::Player(int xLoc, int yLoc, Board* board) 
+  : GamePiece(xLoc, yLoc, board) {
   
 }
 

@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QPushButton>
+#include <QTimer>
 #include "board.h"
 
 class MainWindow : public QWidget {
@@ -21,6 +22,7 @@ public slots:
    void quit();
    void handleHowTo();
    void handlePause();
+   void handleTimer();
 
 private:
    QHBoxLayout *startLayout;
@@ -30,6 +32,7 @@ private:
    QGraphicsScene *scene;
    QGraphicsView *view;
    Board* board;
+   QTimer *timer;
 };
 
 #endif

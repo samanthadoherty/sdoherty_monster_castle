@@ -9,7 +9,7 @@ using namespace std;
 class Player : public GamePiece {
 public:
   Player();
-  Player(int xLoc, int yLoc);
+  Player(int xLoc, int yLoc, Board* board);
   string display();
 private:
 
