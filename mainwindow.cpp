@@ -25,11 +25,6 @@ MainWindow::MainWindow()
    view->setFixedSize(402, 402);
    setFocus();
    
-   /*QLabel* myImage = new QLabel();
-   QImage image("images/00911-Stone-Wall-Backdrop.jpg");
-   myImage->setPixmap(QPixmap::fromImage(image));
-   scene->addWidget(myImage);
-   */
    startLayout = new QHBoxLayout();
    bottomLayout = new QHBoxLayout();
    moveLayout = new QHBoxLayout();
@@ -43,9 +38,6 @@ MainWindow::MainWindow()
    window->setLayout(mainLayout);
    window->show();
    board->display();
-  // board->moveMonster();
-  // cout << "DISPLAY" << endl;
-   //board->display();
 }
 
 MainWindow::~MainWindow() {
@@ -54,7 +46,6 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::handleTimer() {
-   //board->resetList();
    if (counter % 50 == 0) {
       interval = interval / 2;
       if (interval == 0) {
