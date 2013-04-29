@@ -32,12 +32,12 @@ bool Candy::canMoveDiagonalRight(vector<vector<GamePiece*> > *board) {
  if (y + 1 == dim - 1) {
     isMovingRight = false;
   }
-  return y + 1 != dim - 1 && isMovingRight;
+  return y + 1 != dim - 1 && isMovingRight && board->at(x)[y+1]->isSpace();
 }
 
 bool Candy::canMoveDiagonalLeft(vector<vector<GamePiece*> > *board) {
   if (y == 1) {
     isMovingRight = true;
   }
-  return y != 1 && !isMovingRight;
+  return y != 1 && !isMovingRight && board->at(x)[y+1]->isSpace();
 }
