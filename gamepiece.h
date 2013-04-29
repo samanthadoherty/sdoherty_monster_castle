@@ -12,6 +12,8 @@ public:
    GamePiece(int xLoc, int yLoc, Board* board_);
    ~GamePiece();
    void scrollBoard();
+   void moveDiagonalRight();
+   void moveDiagonalLeft();
    void moveRight();
    void moveLeft();
    void moveDown();
@@ -19,6 +21,7 @@ public:
    int getX();
    int getY();
    virtual string display();
+   virtual bool isCandy();
    virtual bool isMonster();
    virtual bool isSpace();
    virtual bool isGold();
@@ -28,6 +31,8 @@ public:
    virtual void move();
    virtual bool canMoveRight(vector<vector<GamePiece*> > *board);
    virtual bool canMoveLeft(vector<vector<GamePiece*> > *board);
+   virtual bool canMoveDiagonalRight(vector<vector<GamePiece*> > *board);
+   virtual bool canMoveDiagonalLeft(vector<vector<GamePiece*> > *board);
    virtual bool canMoveDown(vector<vector<GamePiece*> > *board);
 
 protected:

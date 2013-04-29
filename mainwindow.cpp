@@ -4,12 +4,14 @@
 #include <QKeyEvent>
 #include <QLabel>
 #include <sstream>
+#include "mainmenu.h"
 #include "mainwindow.h"
 
 using namespace std;
 
 MainWindow::MainWindow() 
 {  
+   interval = 10;
    counter = 0;
    isPaused = true;
    timer = new QTimer(this);
@@ -52,12 +54,19 @@ MainWindow::~MainWindow() {
 }
 
 void MainWindow::handleTimer() {
- 
+   //board->resetList();
+   if (counter % 50 == 0) {
+      interval = interval / 2;
+      if (interval == 0) {
+        interval = 10;
+      }
+   }
    counter++;
    if (counter % 2 == 0) {
-      //board->moveMonster();
+     board->moveMonster();
      board->moveGold();
      board->moveDynamite();
+     board->moveCandy();
    }
    if (counter % 20 == 0) {
       board->addGold();
@@ -68,8 +77,10 @@ void MainWindow::handleTimer() {
    if (counter % 1 == 0) {
      board->moveBullet();
    }
-   if (counter % 10 == 0) {
-     // board->addMonster();
+   if (counter % interval == 0) {
+      if (board->getNumMonsters() < 3) {
+        board->addMonster();
+      }
    }
    if (counter % 2 == 0) {
       board->moveMonsterDown();
@@ -78,7 +89,7 @@ void MainWindow::handleTimer() {
    board->display();
    if (board->checkLife()) {
      timer->stop();
-     cout << " YOU LOSE " << endl;
+     gameOver();
    }
    stringstream ss;
    ss << board->getLives();
@@ -91,6 +102,18 @@ void MainWindow::handleTimer() {
    QString score = "Score: ";
    score.append(s1.str().c_str());
    scoreBox->setText(score);
+}
+
+void MainWindow::gameOver() {
+   QMessageBox *game = new QMessageBox();
+   QString msg = ("GAME OVER\n\nYour score was: ");
+   stringstream ss;
+   ss << board->getScore();
+   msg.append(ss.str().c_str());
+   msg.append(" ");
+   msg.append("\nPress Restart to begin a new game or Quit to close all windows.");
+   game->setText(msg);
+   game->show();
 }
 
 void MainWindow::addPushButtons() {
@@ -115,9 +138,7 @@ void MainWindow::addBottomButtons() {
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
-cout << "hey there" << endl;
    if (event->key() == Qt::Key_Left) {
-      cout << "left" << endl;
    }
 }
 
@@ -133,8 +154,8 @@ void MainWindow::addMoveButtons() {
    connect(shoot, SIGNAL(clicked()), this, SLOT(handleShoot()));
 }
 
-void MainWindow::addTextBoxes() {
-    nameBox = new QTextEdit("Name: ");
+void MainWindow::addTextBoxes(QString name) {
+    nameBox = new QTextEdit(name);
     textLayout->addWidget(nameBox);
     scoreBox = new QTextEdit("Score: 0");
     textLayout->addWidget(scoreBox);
@@ -145,7 +166,6 @@ void MainWindow::addTextBoxes() {
 void MainWindow::handleRestart() {
   // isPaused = true;
   // timer->stop();
-   cout << "HERE" << endl;
    qDeleteAll(scene->items());
    Board* temp = board;
    board = new Board(scene);

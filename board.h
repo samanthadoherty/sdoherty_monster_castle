@@ -6,6 +6,7 @@
 #include "gold.h"
 #include "dynamite.h"
 #include "bullet.h"
+#include "candy.h"
 #include <vector>
 #include <QGraphicsScene>
 
@@ -19,6 +20,7 @@ public:
    void removeFromList(int, int);
    void moveMonster();
    void moveMonsterDown();
+   void moveCandy();
    void moveGold();
    void moveDynamite();
    void moveBullet();
@@ -26,19 +28,25 @@ public:
    void moveLeft(int, int);
    void moveDown(int x, int y);
    void moveUp(int x, int y);
+   void moveDiagonalRight(int, int);
+   void moveDiagonalLeft(int, int);
    void movePlayerLeft();
    void movePlayerRight();
    void shoot();
    void addMonster();
+   void addCandy();
    void addGold();
    void addDynamite();
    bool checkLife();
    int getDim();
    int getScore();
    int getLives();
+   int getNumMonsters();
+   void resetList();
 private:
    vector<vector<GamePiece*> > *board;
    vector<GamePiece*>* monsterList;
+   vector<GamePiece*>* candyList;
    vector<GamePiece*>* dynamiteList;
    vector<GamePiece*>* goldList;
    vector<GamePiece*>* bulletList;

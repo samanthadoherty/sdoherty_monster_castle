@@ -19,7 +19,8 @@ public:
    void addPushButtons();
    void addBottomButtons();
    void addMoveButtons();
-   void addTextBoxes();
+   void addTextBoxes(QString);
+   void gameOver();
 
 protected:
    void keyPressEvent(QKeyEvent *);
@@ -50,6 +51,7 @@ private:
    QTimer *timer;
    int counter;
    bool isPaused;
+   int interval;
 };
 
 #endif
