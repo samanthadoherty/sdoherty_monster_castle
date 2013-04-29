@@ -31,7 +31,7 @@ The game will speed up as gameplay goes on, until it becomes virtually impossibl
 ###Objects
 **The following is a list of all objects in the game:**
 
-  1. User [not counted as one of the five objects]: can be moved using left and right buttons. Will be represented by the following image (which will be shrinked to fit game board scale):
+  1. User [not counted as one of the five objects]: can be moved using left and right buttons. Will be represented by the following image:
   
   ![alt text](images/warrior1.png "Player Icon")
   2. Monster [Object 1 of 5]: When this monster appears, it will start to randomly **move** back and forth. If the user runs into the monster, the user
@@ -39,8 +39,7 @@ The game will speed up as gameplay goes on, until it becomes virtually impossibl
 
     ![alt text](images/monster1.png "Blue Monster")
   4. Pot of Gold [Object 2 of 5]: The pot of gold will appear and move vertically down the screen. Every time the user passes
-     over it, 500 points will be added to the user's score. This object will be represented by the following image, which will
-     obviously be resized to fit the game board scale:
+     over it, 500 points will be added to the user's score. This object will be represented by the following image:
 
      ![alt text](images/gold1.png "Pot of Gold")
   5. Candy [Object 3 of 5]: The candy will randomly appear and **move** vertically down the board. If the user runs into
