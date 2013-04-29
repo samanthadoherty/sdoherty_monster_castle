@@ -23,5 +23,5 @@ bool Gold::isSpace() {
 
 bool Gold::canMoveDown(vector<vector<GamePiece*> > *board) {
   GamePiece* pieceBelow = board->at(x)[y];
-  return x + 1 != dim;
+  return x + 1 != dim && pieceBelow != board->at(0)[0];
 }
