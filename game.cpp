@@ -16,7 +16,9 @@ int main (int argc, char *argv[]) {
    mw.addMoveButtons();
    mw.addTextBoxes();*/
    MainMenu mm;
+   mm.enterName();
    mm.contButton();
+   mm.show();
    
    return a.exec();
 }

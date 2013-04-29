@@ -2,6 +2,7 @@
 #define MAINMENU_H
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QLineEdit>
 #include <QVBoxLayout>
 
 class MainMenu : public QWidget {
@@ -12,11 +13,17 @@ public:
    ~MainMenu();
    void enterName();
    void contButton();
+   QString getName();
+   void show();
+   QString name;
+public slots:
+   void handleCont();
 private:
    QWidget *window;
    QGraphicsScene *scene;
    QGraphicsView *view; 
    QVBoxLayout *mainLayout;  
+   QLineEdit *nameEntry;
 };
 
 #endif
