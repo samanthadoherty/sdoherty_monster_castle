@@ -2,7 +2,7 @@
 #include "candy.h"
 
 using namespace std;
-
+//
 Candy::Candy() {}
 
 Candy::Candy(int xLoc, int yLoc, Board* board)
