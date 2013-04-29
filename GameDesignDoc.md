@@ -33,21 +33,21 @@ The game will speed up as gameplay goes on, until it becomes virtually impossibl
 
   1. User [not counted as one of the five objects]: can be moved using left and right buttons. Will be represented by the following image (which will be shrinked to fit game board scale):
   
-  ![alt text](http://www.pixeljoint.com/files/icons/full/warrior_single_fn.gif "Player Icon")
+  ![alt text](images/warrior1.png "Player Icon")
   2. Monster [Object 1 of 5]: When this monster appears, it will start to randomly **move** back and forth. If the user runs into the monster, the user
       will lose a life. If the user shoots the monster, he gains 300 points. This monster will be represented by the following image:
 
-    ![alt text](http://files.softicons.com/download/animal-icons/monster-icons-by-spoongraphics/png/24x24/Blue-Monster.png "Blue Monster")
+    ![alt text](images/monster1.png "Blue Monster")
   4. Pot of Gold [Object 2 of 5]: The pot of gold will appear and move vertically down the screen. Every time the user passes
      over it, 500 points will be added to the user's score. This object will be represented by the following image, which will
      obviously be resized to fit the game board scale:
 
-     ![alt text](http://www.allfreelogo.com/images/vector-thumb/pot-of-gold-prev114054467117I6sP.jpg "Pot of Gold")
+     ![alt text](images/gold1.png "Pot of Gold")
   5. Candy [Object 3 of 5]: The candy will randomly appear and **move** vertically down the board. If the user runs into
      it, the user will gain one life. The candy will disappear when it is collected and reappear elsewhere later. 
      The candy will be represented by this icon:
 
-     ![alt text](http://www.clker.com/cliparts/9/c/2/c/11949863201080446347candy_02.svg.thumb.png "Candy")
+     ![alt text](images/candy1.png "Candy")
   6. Bullet [Object 4 of 5]: If the user clicks the "Shoot" pushbutton, he will shoot a bullet vertically up the 
   screen. If he hits a monster with the bullet, that monster will die and the user will gain 300 points. The bullet will be
     represented by the following icon: 
@@ -62,7 +62,7 @@ The game will speed up as gameplay goes on, until it becomes virtually impossibl
      frequent
      object. The dynamite will be represented by the following image:
      
-     ![alt text](http://tutorialqueen.com/wp-content/uploads/2009/04/photoshop-dinamite-logo-stock-photo28-thumb.jpg "Dynamite")
+     ![alt text](dynamite1.png "Dynamite")
      
 ###Graphical User Interface
 The following will show how the game will look at different stages: 
