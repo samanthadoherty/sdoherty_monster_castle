@@ -10,7 +10,7 @@ Player::Player(int xLoc, int yLoc, Board* board)
 }
 
 string Player::display() {
-  return "P";
+  return "images/warrior1.png";
 }
 
 bool Player::isPlayer() {
