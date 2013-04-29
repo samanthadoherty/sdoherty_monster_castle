@@ -10,7 +10,7 @@ Gold::Gold(int xLoc, int yLoc, Board* board)
 }
 
 string Gold::display() {
-  return "G";
+  return "images/gold1.png";
 }
 
 bool Gold::isGold() {
@@ -23,5 +23,5 @@ bool Gold::isSpace() {
 
 bool Gold::canMoveDown(vector<vector<GamePiece*> > *board) {
   GamePiece* pieceBelow = board->at(x)[y];
-  return x + 1 != dim && !pieceBelow->isMonster();
+  return x + 1 != dim;
 }

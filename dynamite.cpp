@@ -10,7 +10,7 @@ Dynamite::Dynamite(int xLoc, int yLoc, Board* board)
 }
 
 string Dynamite::display() {
-  return "D";
+  return "images/dynamite1.png";
 }
 
 bool Dynamite::isDynamite() {
