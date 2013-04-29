@@ -14,13 +14,21 @@ public:
    void scrollBoard();
    void moveRight();
    void moveLeft();
+   void moveDown();
+   void moveUp();
    int getX();
    int getY();
    virtual string display();
    virtual bool isMonster();
+   virtual bool isSpace();
+   virtual bool isGold();
+   virtual bool isDynamite();
+   virtual bool isBullet();
+   virtual bool isPlayer();
    virtual void move();
    virtual bool canMoveRight(vector<vector<GamePiece*> > *board);
    virtual bool canMoveLeft(vector<vector<GamePiece*> > *board);
+   virtual bool canMoveDown(vector<vector<GamePiece*> > *board);
 
 protected:
    QTimer timer;

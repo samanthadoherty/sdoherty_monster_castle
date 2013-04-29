@@ -6,6 +6,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QPushButton>
+#include <QTextEdit>
 #include <QTimer>
 #include "board.h"
 
@@ -17,22 +18,38 @@ public:
    ~MainWindow();
    void addPushButtons();
    void addBottomButtons();
+   void addMoveButtons();
+   void addTextBoxes();
+
+protected:
+   void keyPressEvent(QKeyEvent *);
    
 public slots:
    void quit();
    void handleHowTo();
    void handlePause();
    void handleTimer();
-
+   void handleLeft();
+   void handleRight();
+   void handleShoot();
+   void handleRestart();
+   void handleStart();
 private:
    QHBoxLayout *startLayout;
+   QHBoxLayout *moveLayout;
    QVBoxLayout *mainLayout;
    QHBoxLayout *bottomLayout;
+   QTextEdit *nameBox;
+   QTextEdit *scoreBox;
+   QTextEdit *livesBox;
+   QHBoxLayout *textLayout;
    QWidget *window;
    QGraphicsScene *scene;
    QGraphicsView *view;
    Board* board;
    QTimer *timer;
+   int counter;
+   bool isPaused;
 };
 
 #endif
