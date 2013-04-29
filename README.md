@@ -5,8 +5,8 @@
   + USC ID: 8740938974
 
 ### Game Information
-  + Game Name: Monster Castle: Quest for Gold
-  + Game Description: User dodges monsters and dynamite to collect candy and gold for points.
+  + Game Name: Escape from Monster Castle
+  + Game Description: User shoots or dodges monsters and dynamite to collect gold for points.
   + [Game Design Doc](GameDesignDoc.md)
 
 
@@ -14,12 +14,12 @@
 The grader should use the following procedure to compile and run the code:
 ```shell
 #Compile Instructions
-echo "Write command here"
+qmake -project
+qmake
+make
 #Doxygen Instructions
-echo "Write command here"
+doxygen -g config.txt
+doxygen config.txt
 #Command to run
-echo "Write command here"
+./game_sdoherty
 ```
-
-### Screenshots -- [Optional]
-You can either remove this section or add screenshots if you wish.
