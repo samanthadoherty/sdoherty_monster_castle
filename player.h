@@ -11,6 +11,10 @@ public:
   Player();
   Player(int xLoc, int yLoc, Board* board);
   string display();
+  bool isSpace();
+  bool isPlayer();
+  bool canMoveRight(vector<vector<GamePiece*> > *board);
+  bool canMoveLeft(vector<vector<GamePiece*> > *board);
 private:
 
 };

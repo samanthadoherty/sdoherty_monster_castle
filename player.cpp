@@ -12,3 +12,20 @@ Player::Player(int xLoc, int yLoc, Board* board)
 string Player::display() {
   return "P";
 }
+
+bool Player::isPlayer() {
+  return true;
+}
+
+bool Player::isSpace() {
+  return false;
+}
+
+bool Player::canMoveRight(vector<vector<GamePiece*> > *board) {
+  GamePiece* right = board->at(x)[y+1];
+  return y+1 != dim && !right->isMonster();
+}
+bool Player::canMoveLeft(vector<vector<GamePiece*> > *board){
+  GamePiece* left = board->at(x)[y-1];
+  return y != 0 && !left->isMonster();
+}
