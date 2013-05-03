@@ -2,6 +2,7 @@
 #include <QGraphicsPixmapItem>
 #include <QMessageBox>
 #include <QKeyEvent>
+#include <QtGui>
 #include <QLabel>
 #include <sstream>
 #include "mainmenu.h"
@@ -15,16 +16,15 @@ MainWindow::MainWindow()
    counter = 0;
    isPaused = true;
    timer = new QTimer(this);
-   timer->setInterval(300);
+   timer->setInterval(250);
    connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
    
    window = new QWidget();
    scene = new QGraphicsScene();
    view = new QGraphicsView( scene );
+   this->setFocusPolicy(Qt::StrongFocus);
    board = new Board(scene);
    view->setFixedSize(402, 402);
-   setFocus();
-   
    startLayout = new QHBoxLayout();
    bottomLayout = new QHBoxLayout();
    moveLayout = new QHBoxLayout();
@@ -37,48 +37,55 @@ MainWindow::MainWindow()
    mainLayout->addLayout(bottomLayout, 3);
    window->setLayout(mainLayout);
    window->show();
-   board->display();
+   board->display();  
 }
 
 MainWindow::~MainWindow() {
-   delete scene;
-   delete view;
 }
 
 void MainWindow::handleTimer() {
+   int moveAll = 2;
+   int goldA = 15;
+   int candyA = 20;
+   int dynamiteA = 25;
+   int monsterA = 7;
+
    if (counter % 50 == 0) {
-      interval = interval / 2;
-      if (interval == 0) {
-        interval = 10;
-      }
+      cout << "HERE" << endl;
+      candyA = candyA/2;
+      moveAll = moveAll/2;
+      goldA = goldA/2;
+      dynamiteA = dynamiteA/2;
+      monsterA = monsterA/2;
    }
    counter++;
-   if (counter % 2 == 0) {
-     board->moveMonster();
+   if (counter % moveAll == 0) {
+     //board->moveMonster();
      board->moveGold();
      board->moveDynamite();
      board->moveCandy();
    }
-   if (counter % 20 == 0) {
-      board->addGold();
+   if (counter % goldA == 0) {
+     board->addGold();
    }
-   if (counter % 25 == 0) {
+   if (counter % candyA == 0) {
+     board->addCandy();
+   }
+   if (counter % dynamiteA == 0) {
      board->addDynamite();
    }
    if (counter % 1 == 0) {
      board->moveBullet();
    }
-   if (counter % interval == 0) {
-      if (board->getNumMonsters() < 3) {
-        board->addMonster();
-      }
+   if (counter % monsterA == 0) {
+     board->addMonster();
    }
-   if (counter % 2 == 0) {
+   if (counter % moveAll == 0) {
       board->moveMonsterDown();
    }
    qDeleteAll(scene->items());
    board->display();
-   if (board->checkLife()) {
+   if (board->getLives() == 0) {
      timer->stop();
      gameOver();
    }
@@ -128,11 +135,31 @@ void MainWindow::addBottomButtons() {
    connect(quit, SIGNAL(clicked()), this, SLOT(quit()));
 }
 
-void MainWindow::keyPressEvent(QKeyEvent *event) {
-   if (event->key() == Qt::Key_Left) {
+void MainWindow::keyPressEvent(QKeyEvent *keyEvent) {
+   cout << "here" << endl;
+   if (keyEvent->key() == Qt::Key_Left) {
+      cout << "key";
    }
 }
 
+/*bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
+   QKeyEvent *keyEvent = NULL;
+   bool result = false;
+   if (event->type() == QEvent::KeyPress) {
+      keyEvent = dynamic_cast<QKeyEvent*>(event);
+      this->keyPressEvent(keyEvent);
+      result = true;
+   }
+   else if (event->type() == QEvent::KeyRelease) {
+      keyEvent = dynamic_cast<QKeyEvent*>(event);
+      this->keyReleaseEvent(keyEvent);
+      result = true;
+   }
+   else
+      result = QObject::eventFilter(obj, event);
+   return result;
+} */  
+  
 void MainWindow::addMoveButtons() {
    QPushButton *left = new QPushButton("Left");
    moveLayout->addWidget(left);
@@ -156,11 +183,12 @@ void MainWindow::addTextBoxes(QString name) {
 
 void MainWindow::handleRestart() {
   // isPaused = true;
-  // timer->stop();
+   timer->stop();
    qDeleteAll(scene->items());
    Board* temp = board;
    board = new Board(scene);
    delete temp;
+   timer->start();
    board->display();
 }
 
@@ -176,6 +204,7 @@ void MainWindow::handleStart() {
    if (isPaused) {
      isPaused = false;
      timer->start();
+     board->addMonster();
    }
 }
 
@@ -208,7 +237,7 @@ void MainWindow::handlePause() {
 
 void MainWindow::handleHowTo() {
    QMessageBox *msgBox = new QMessageBox();
-   msgBox->setText("How to Play the Game:\n\n1. Use the left and right arrow keys to move player.\n\n2. Goal is to get as many points as by possible by moving your player back and forth to collect candy (worth 100 points) and/or pots of gold (worth 500 points) as they move across the screen.\n\n3. Be careful though! You only get 3 lives to start with and if you run into any of the monsters that will also be moving across the board, you die. The game will end when you have zero lives left.\n\n4. Also, if you run into a stick of dynamite, the game automatically ends regardless of how many lives you have left.\n\n5. The game will start to speed up after a while, so collect points while you can!\n\n6. You may pause, restart, or quit the game at any time.\n\nReady?");
+   msgBox->setText("How to Play the Game:\n\n1. Use the left and right arrow keys to move player.\n\n2. Goal is to get as many points as by possible by moving your player back and forth to collect pots of gold (worth 100 points) as they move across the screen.\n\n3. Be careful though! You only get 3 lives to start with and if you run into any of the monsters that will also be moving across the board, you die. If you collect a piece of candy though, you gain one life. The game will end when you have zero lives left.\n\n4. If you press the 'Shoot' button and hit a monster with your bullet, you gain 500 points and the monster dies! 5. Also, if you run into a stick of dynamite, the game automatically ends regardless of how many lives you have left.\n\n6. The game will start to speed up after a while, so collect points while you can!\n\n7. You may pause, restart, or quit the game at any time.\n\nReady?");
    msgBox->show();
 }
 

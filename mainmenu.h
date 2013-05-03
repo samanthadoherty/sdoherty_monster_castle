@@ -16,6 +16,8 @@ public:
    QString getName();
    void show();
    QString name;
+protected:
+
 public slots:
    void handleCont();
 private:

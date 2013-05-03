@@ -24,8 +24,6 @@ MainMenu::MainMenu() {
 }
 
 MainMenu::~MainMenu() {
-   delete scene;
-   delete view;
 }
 
 void MainMenu::show() {
@@ -50,6 +48,7 @@ void MainMenu::contButton() {
 
 void MainMenu::handleCont() {
   MainWindow *mw = new MainWindow();
+  mw->setFocusPolicy(Qt::StrongFocus);
   mw->addPushButtons();
   mw->addBottomButtons();
   mw->addMoveButtons();

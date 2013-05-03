@@ -24,6 +24,8 @@ public:
 
 protected:
    void keyPressEvent(QKeyEvent *);
+  // bool eventFilter(QObject *obj, QEvent *event);
+  // void keyReleaseEvent(QKeyEvent *keyEvent);
    
 public slots:
    void quit();
