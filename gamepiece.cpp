@@ -72,16 +72,25 @@ void GamePiece::moveUp() {
 }
 
 bool GamePiece::canMoveRight(vector<vector<GamePiece*> >* board) {
-  //board->at(x)[y]->display();
-  return true;
+  if (board->at(x)[y]->isMonster()) {
+    return true;
+  }
+  else
+    return true;
 }
 
 bool GamePiece::canMoveLeft(vector<vector<GamePiece*> > *board) {
-  //board->at(x)[y]->display();
- return true;
+  if (board->at(x)[y]->isMonster()) {
+    return true;
+  }
+  else
+    return true;
 }
 
 bool GamePiece::canMoveDown(vector<vector<GamePiece*> > *board) {
-  //board->at(x)[y]->display();
-  return true;
+  if (board->at(x)[y]->isMonster()) {
+    return true;
+  }
+  else
+    return true;
 }

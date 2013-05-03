@@ -22,10 +22,16 @@ bool Player::isSpace() {
 }
 
 bool Player::canMoveRight(vector<vector<GamePiece*> > *board) {
-  GamePiece* right = board->at(x)[y+1];
-  return y + 1 != dim;
+  if (board->at(x)[y+1] == isMonster()) {
+     return y + 1 != dim;
+  }
+  else
+     return y + 1 != dim;
 }
 bool Player::canMoveLeft(vector<vector<GamePiece*> > *board){
-  GamePiece* left = board->at(x)[y-1];
-  return y != 0;
+  if (board->at(x)[y-1] == isMonster()) {
+     return y != 0;
+  }
+  else
+     return y != 0;
 }
