@@ -10,7 +10,7 @@ Dynamite::Dynamite(int xLoc, int yLoc, Board* board)
 }
 
 string Dynamite::display() {
-  return "images/dynamite1.png";
+  return "images/realdynamite.png";
 }
 
 bool Dynamite::isDynamite() {
@@ -19,5 +19,9 @@ bool Dynamite::isDynamite() {
 
 bool Dynamite::canMoveDown(vector<vector<GamePiece*> > *board) {
   GamePiece* pieceBelow = board->at(x)[y];
-  return x + 1 != dim && pieceBelow->isSpace();
+  if (!pieceBelow->isMonster() && !pieceBelow->isBullet()) {
+     return x + 1 != dim;
+  }
+  else
+     return false;
 }

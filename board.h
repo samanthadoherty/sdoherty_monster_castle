@@ -17,7 +17,11 @@ public:
    Board();
    Board(QGraphicsScene*);
    void display(); 
-   void removeFromList(int, int);
+   void removeCandy(int x, int y);
+   void removeMonster(int x, int y);
+   void removeBullet(int x, int y);
+   void removeGold(int x, int y);
+   void removeDynamite(int x, int y);
    void moveMonster();
    void moveMonsterDown();
    void moveCandy();

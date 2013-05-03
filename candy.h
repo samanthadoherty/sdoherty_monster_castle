@@ -16,9 +16,7 @@ public:
   bool isCandy();
   bool isSpace();
   bool canMoveDown(vector<vector<GamePiece*> > *board);  
-  bool canMoveDiagonalRight(vector<vector<GamePiece*> > *board);
-  bool canMoveDiagonalLeft(vector<vector<GamePiece*> > *board);
 private:
-  bool isMovingRight;
+  //bool isMovingRight;
 };
 #endif

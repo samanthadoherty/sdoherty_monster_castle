@@ -2,16 +2,15 @@
 #include "candy.h"
 
 using namespace std;
-//
+
 Candy::Candy() {}
 
 Candy::Candy(int xLoc, int yLoc, Board* board)
   : GamePiece(xLoc, yLoc, board) {
-  isMovingRight = true;
 }
 
 string Candy::display() {
-  return "images/candy1.png";
+  return "images/candyfinal.png";
 }
 
 bool Candy::isCandy() {
@@ -25,19 +24,9 @@ bool Candy::isSpace() {
 
 bool Candy::canMoveDown(vector<vector<GamePiece*> > *board) {
   GamePiece* pieceBelow = board->at(x)[y];
-  return x + 1 != dim && !pieceBelow->isMonster();
-}
-
-bool Candy::canMoveDiagonalRight(vector<vector<GamePiece*> > *board) {
- if (y + 1 == dim - 1) {
-    isMovingRight = false;
+  if (!pieceBelow->isMonster() && !pieceBelow->isBullet()) {
+     return x + 1 != dim;
   }
-  return y + 1 != dim - 1 && isMovingRight && board->at(x)[y+1]->isSpace();
-}
-
-bool Candy::canMoveDiagonalLeft(vector<vector<GamePiece*> > *board) {
-  if (y == 1) {
-    isMovingRight = true;
-  }
-  return y != 1 && !isMovingRight && board->at(x)[y+1]->isSpace();
+  else
+     return x + 1 != dim;
 }

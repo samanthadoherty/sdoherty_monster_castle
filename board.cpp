@@ -7,7 +7,7 @@ Board::Board() {}
 Board::Board(QGraphicsScene* scene_) {
    px = 9; py = 5;
    dim = 10;
-   lives = 2;
+   lives = 3;
    score = 0;
    scene = scene_;
    
@@ -20,8 +20,8 @@ Board::Board(QGraphicsScene* scene_) {
    
    for (int i = 0; i < dim; i++) {
       vector<GamePiece*> col;
-      for (int i = 0; i < dim; i++) {
-        GamePiece* gp = new GamePiece(i, i, this);
+      for (int j = 0; j < dim; j++) {
+        GamePiece* gp = new GamePiece(i, j, this);
         col.push_back(gp);
       }
       board->push_back(col);
@@ -29,19 +29,6 @@ Board::Board(QGraphicsScene* scene_) {
    
    GamePiece* player = new Player(px, py, this);
    board->at(px)[py] = player;
-   
-   /*GamePiece* monster = new Monster(3, 4, this);
-   board->at(3)[4] = monster;
-   monsterList->push_back(monster);
-   GamePiece* candy = new Candy(0, 6, this);
-   board->at(0)[6] = candy;
-   candyList->push_back(candy);
-   GamePiece* gold = new Gold(3, 0, this);
-   board->at(3)[0] = gold; 
-   goldList->push_back(gold);
-   GamePiece* dynamite = new Dynamite(5, 0, this);
-   board->at(5)[0] = dynamite;
-   dynamiteList->push_back(dynamite); */
 }
 
 void Board::resetList() {
@@ -73,95 +60,18 @@ void Board::moveCandy() {
      GamePiece* candy = candyList->at(i);
      int x = candy->getX();
      int y = candy->getY();
-     if(x + 1 != dim) {
+     if(candy->canMoveDown(board)) {
         if (x + 1 == px && y == py) {
           board->at(x)[y] = new GamePiece(x, y, this);
-          removeFromList(x, y);
+          removeCandy(x, y);
           lives++;
         } else {
           moveDown(candy->getX(), candy->getY());
         }
      } else {
-       board->at(x)[y] = new GamePiece(x, y, this);
-       removeFromList(x, y);
+       board->at(candy->getX())[candy->getY()] = new GamePiece(candy->getX(), candy->getY(), this);
+       removeCandy(x, y);
      }
-  }
-}
-
-void Board::moveMonster() {
-   for (unsigned int i = 0 ; i < monsterList->size(); i++) {
-     GamePiece* monster = monsterList->at(i);
-     if (monster->canMoveRight(board)) {
-        moveRight(monster->getX(), monster->getY());
-     } else if (monster->canMoveLeft(board)) { 
-        moveLeft(monster->getX(), monster->getY());
-     }
-   }
-}
-
-void Board:: moveMonsterDown() {
-   for (unsigned int i = 0 ; i < monsterList->size(); i++) {
-     GamePiece* monster = monsterList->at(i);
-     int y = monster->getY();
-     if (monster->getX() != dim-1) {
-       moveDown(monster->getX(), monster->getY());
-     } else {
-       board->at(dim-1)[monster->getY()] = new GamePiece(dim-1, monster->getY(), this);
-       removeFromList(dim-1, y);
-     }
-   }
-} 
-
-void Board::moveBullet() {
-  for (unsigned int i = 0; i < bulletList->size(); i++) {
-    GamePiece* bullet = bulletList->at(i);
-    int x = bullet->getX();
-    int y = bullet->getY();
-    if (x == 0) {
-      board->at(x)[y] = new GamePiece(x, y, this);
-    } else if (board->at(x-1)[y]->isSpace()) {
-        moveUp(x, y);
-    } else {
-      score += 100;
-      delete bullet;
-      removeFromList(x+1, y);
-      moveUp(x, y);
-      board->at(x-1)[y] = new GamePiece(x-1, y, this);
-    }
-  }
-  
-}
-    
-void Board::removeFromList(int x, int y) {
-  for (unsigned int i = 0; i < bulletList->size(); i++) {
-    GamePiece* bullet = bulletList->at(i);
-    if (bullet->getX() == x && bullet->getY() == y) {
-      bulletList->erase(bulletList->begin() + i);
-    }
-  }
-  for (unsigned int i = 0; i < monsterList->size(); i++) {
-    GamePiece* monster = monsterList->at(i);
-    if (monster->getX() == x && monster->getY() == y) {
-      monsterList->erase(monsterList->begin() + i);
-    }
-  }
-  for (unsigned int i = 0; i < goldList->size(); i++) {
-    GamePiece* gold = goldList->at(i);
-    if (gold->getX() == x && gold->getY() == y) {
-      goldList->erase(goldList->begin() + i);
-    }
-  }
-  for (unsigned int i = 0; i < dynamiteList->size(); i++) {
-    GamePiece* dynamite = dynamiteList->at(i);
-    if (dynamite->getX() == x && dynamite->getY() == y) {
-      dynamiteList->erase(dynamiteList->begin() + i);
-    }
-  }
-  for (unsigned int i = 0; i < candyList->size(); i++) {
-    GamePiece* candy = candyList->at(i);
-    if (candy->getX() == x && candy->getY() == y) {
-      candyList->erase(candyList->begin() + i);
-    }
   }
 }
 
@@ -173,37 +83,242 @@ void Board::moveGold() {
      if(gold->canMoveDown(board)) {
         if (x + 1 == px && y == py) {
           board->at(x)[y] = new GamePiece(x, y, this);
-          removeFromList(x, y);
-          score += 500;
-        } else {
-          moveDown(gold->getX(), gold->getY());
+          removeGold(x, y);
+          score += 100;
+        } 
+        else {
+           moveDown(gold->getX(), gold->getY());
         }
      } else {
        board->at(gold->getX())[gold->getY()] = new GamePiece(gold->getX(), gold->getY(), this);
-       removeFromList(x, y);
+       removeGold(x, y);
      }
   }
-}  
+} 
+
+void Board::moveMonster() {
+   for (unsigned int i = 0; i < monsterList->size(); i++) {
+     GamePiece* monster = monsterList->at(i);
+     if (monster->canMoveRight(board)) {
+        if (monster->getX() + 1 == px && monster->getY() == py) {
+           lives--;
+           px = dim - 1;
+           py = 5;
+           board->at(px)[py] = new Player(px, py, this);
+           board->at(monster->getX())[monster->getY() + 1] = new GamePiece(monster->getX(), monster->getY() + 1, this);
+           GamePiece* gp = new GamePiece(monster->getX(), monster->getY(), this);
+           board->at(monster->getX())[monster->getY()] = gp;
+           removeMonster(monster->getX(), monster->getY());
+        }
+        else if (board->at(monster->getX())[monster->getY() + 1]->isCandy()) {
+            board->at(monster->getX())[monster->getY() + 1] = new GamePiece(monster->getX(), monster->getY() + 1, this);
+            removeCandy(monster->getX(), monster->getY()+1);
+            moveRight(monster->getX(), monster->getY());
+        }
+        else if (board->at(monster->getX())[monster->getY() + 1]->isGold()) {
+            board->at(monster->getX())[monster->getY() + 1] = new GamePiece(monster->getX(), monster->getY() + 1, this);
+            removeGold(monster->getX(), monster->getY()+1);
+            moveRight(monster->getX(), monster->getY());
+        }
+        else if (board->at(monster->getX())[monster->getY() + 1]->isDynamite()) {
+            board->at(monster->getX())[monster->getY() + 1] = new GamePiece(monster->getX(), monster->getY() + 1, this);
+            removeDynamite(monster->getX(), monster->getY()+1);
+            moveRight(monster->getX(), monster->getY());
+        }
+        else {
+           moveRight(monster->getX(), monster->getY());
+        }
+     } else if (monster->canMoveLeft(board)) {
+        if (monster->getY() - 1 == py && monster->getX() == px) {
+           lives--;
+           px = dim - 1;
+           py = 5;
+           board->at(px)[py] = new Player(px, py, this);
+           board->at(monster->getX())[monster->getY() - 1] = new GamePiece(monster->getX(), monster->getY() - 1, this);
+           GamePiece* gp = new GamePiece(monster->getX(), monster->getY(), this);
+           board->at(monster->getX())[monster->getY()] = gp;
+           removeMonster(monster->getX(), monster->getY());
+        }
+        else if (board->at(monster->getX())[monster->getY() - 1]->isCandy()) {
+           board->at(monster->getX())[monster->getY() - 1] = new GamePiece(monster->getX(), monster->getY() - 1, this);
+           removeCandy(monster->getX(), monster->getY()-1);
+           moveRight(monster->getX(), monster->getY());
+           
+        }
+        else if (board->at(monster->getX())[monster->getY() - 1]->isGold()) {
+           board->at(monster->getX())[monster->getY() - 1] = new GamePiece(monster->getX(), monster->getY() - 1, this);
+           removeGold(monster->getX(), monster->getY()-1);
+           moveRight(monster->getX(), monster->getY());
+        }
+        else if (board->at(monster->getX())[monster->getY() - 1]->isDynamite()) {
+           board->at(monster->getX())[monster->getY() - 1] = new GamePiece(monster->getX(), monster->getY() - 1, this);
+           removeDynamite(monster->getX(), monster->getY()-1);
+           moveLeft(monster->getX(), monster->getY());     
+        }
+        else {
+           moveLeft(monster->getX(), monster->getY());
+        }
+     }
+   }
+}
+
+void Board:: moveMonsterDown() {
+   for (unsigned int i = 0 ; i < monsterList->size(); i++) {
+     GamePiece* monster = monsterList->at(i);
+     int y = monster->getY();
+     if (monster->getX() != dim-1) {
+       if (monster->getY() == py && monster->getX() + 1 == px) {
+           lives--;
+           px = dim - 1;
+           py = 5;
+           board->at(px)[py] = new Player(px, py, this);
+           board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
+           removeMonster(monster->getX(), monster->getY());
+           GamePiece* gp = new GamePiece(monster->getX(), monster->getY(), this);
+           board->at(monster->getX())[monster->getY()] = gp;
+
+        }
+        else if (board->at(monster->getX() + 1)[monster->getY()]->isCandy()) {
+           board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
+           removeCandy(monster->getX() + 1, monster->getY());
+           moveRight(monster->getX(), monster->getY());
+
+        }
+        else if (board->at(monster->getX() + 1)[monster->getY()]->isGold()) {
+           board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
+           removeGold(monster->getX() + 1, monster->getY()); 
+           moveRight(monster->getX(), monster->getY());
+
+        }
+        else if (board->at(monster->getX() + 1)[monster->getY()]->isDynamite()) {
+           board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
+           removeDynamite(monster->getX() + 1, monster->getY());
+           moveLeft(monster->getX(), monster->getY());
+        }
+        else {
+           moveDown(monster->getX(), monster->getY());
+        }
+     } 
+     else {
+       board->at(dim-1)[monster->getY()] = new GamePiece(dim-1, monster->getY(), this);
+       removeMonster(dim-1, y);
+     }
+   }
+} 
+
+void Board::moveBullet() {
+  for (unsigned int i = 0; i < bulletList->size(); i++) {
+    GamePiece* bullet = bulletList->at(i);
+    int x = bullet->getX();
+    int y = bullet->getY();
+    if (x == 0) {
+       board->at(x)[y] = new GamePiece(x, y, this);
+       removeBullet(x, y);
+    } 
+    else if (board->at(x-1)[y]->isMonster()) {
+       board->at(x)[y] = new GamePiece(x, y, this);
+       board->at(x-1)[y] = new GamePiece(x - 1, y, this); 
+       removeBullet(x, y);
+       removeMonster(x-1, y);
+       score += 500;
+    }
+    else if (board->at(x-1)[y]->isCandy()) {
+       board->at(x)[y] = new GamePiece(x, y, this);
+       board->at(x-1)[y] = new GamePiece(x - 1, y, this); 
+       removeBullet(x, y);
+       removeCandy(x-1, y);
+    }
+    else if (board->at(x-1)[y]->isGold()) {
+       board->at(x)[y] = new GamePiece(x, y, this);
+       board->at(x-1)[y] = new GamePiece(x - 1, y, this); 
+       removeBullet(x, y);
+       removeGold(x-1, y);
+    }
+    else if (board->at(x-1)[y]->isDynamite()) {
+       board->at(x)[y] = new GamePiece(x, y, this);
+       board->at(x-1)[y] = new GamePiece(x - 1, y, this); 
+       removeBullet(x, y);
+       removeDynamite(x-1, y);
+    } 
+    else
+        moveUp(x, y);
+  }
+  
+}
 
 void Board::moveDynamite() {
    for (unsigned int i = 0; i < dynamiteList->size(); i++) {
       GamePiece* dynamite = dynamiteList->at(i);
       if (dynamite->canMoveDown(board)) {
-         moveDown(dynamite->getX(), dynamite->getY());
-      } else {
-         for (int i = dynamite->getX(); i < dynamite->getX() + 2; i++) {
-           for (int j = dynamite->getY(); j < dynamite->getY() + 2; j++) {
-             if (j < dim && i < dim) {
-               if (i == px && j == py) {
-                  lives = 0;
-                }
-               board->at(i)[j] = new GamePiece(i, j, this);
-             }
-           }
+         moveDown(dynamite->getX(), dynamite->getY());         
+      } 
+      else {
+         if (dynamite->getX() + 1 == dim && dynamite->getY() != 0) {        
+            for (int i = dynamite->getX() - 1; i <= dynamite->getX(); i++) {
+               for (int j = dynamite->getY() - 1; j <= dynamite->getY() + 1; j++) {
+                  if (j < dim && i < dim) {
+                     if (i == px && j == py) {
+                        lives = 0;
+                     }
+                     board->at(i)[j] = new GamePiece(i, j, this);
+                  }
+               }
+            }
+            board->at(dynamite->getX())[dynamite->getY()] = new GamePiece(dynamite->getX(), dynamite->getY(), this);
+            removeDynamite(dynamite->getX(), dynamite->getY());
          }
-         removeFromList(dynamite->getX(), dynamite->getY());
+         else {
+            board->at(dynamite->getX())[dynamite->getY()] = new GamePiece(dynamite->getX(), dynamite->getY(), this);
+            removeDynamite(dynamite->getX(), dynamite->getY());
+            board->at(dynamite->getX())[dynamite->getY() + 1] = new GamePiece(dynamite->getX(), dynamite->getY() + 1, this);
+         }
       }
    }
+}
+
+void Board::removeCandy(int x, int y) {
+  for (unsigned int i = 0; i < candyList->size(); i++) {
+    GamePiece* candy = candyList->at(i);
+    if (candy->getX() == x && candy->getY() == y) {
+      candyList->erase(candyList->begin() + i);
+    }
+  }
+}
+ 
+void Board::removeGold(int x, int y) {
+  for (unsigned int i = 0; i < goldList->size(); i++) {
+    GamePiece* gold = goldList->at(i);
+    if (gold->getX() == x && gold->getY() == y) {
+      goldList->erase(goldList->begin() + i);
+    }
+  }
+} 
+
+void Board::removeBullet(int x, int y) {
+  for (unsigned int i = 0; i < bulletList->size(); i++) {
+    GamePiece* bullet = bulletList->at(i);
+    if (bullet->getX() == x && bullet->getY() == y) {
+      bulletList->erase(bulletList->begin() + i);
+    }
+  }
+}
+
+void Board::removeMonster(int x, int y) {
+  for (unsigned int i = 0; i < monsterList->size(); i++) {
+    GamePiece* monster = monsterList->at(i);
+    if (monster->getX() == x && monster->getY() == y) {
+      monsterList->erase(monsterList->begin() + i);
+    }
+  }
+}
+
+void Board::removeDynamite(int x, int y) {
+  for (unsigned int i = 0; i < dynamiteList->size(); i++) {
+    GamePiece* dynamite = dynamiteList->at(i);
+    if (dynamite->getX() == x && dynamite->getY() == y) {
+      dynamiteList->erase(dynamiteList->begin() + i);
+    }
+  }
 }
 
 void Board::addGold() {
@@ -217,7 +332,7 @@ void Board::addDynamite() {
   int y = rand() % (dim-1);
   GamePiece* dynamite = new Dynamite(0, y, this);
   board->at(0)[y] = dynamite;
-  dynamiteList->push_back(dynamite);  
+  dynamiteList->push_back(dynamite); 
 }
 
 void Board::addCandy() {
@@ -235,7 +350,6 @@ void Board::addMonster() {
 }
 
 void Board::shoot() {
-  cout << board->at(dim-1)[0]->display() << endl;
   if (!board->at(px-1)[py]->isBullet()) {
     GamePiece* bullet = new Bullet(px-1, py, this);
     board->at(px-1)[py] = bullet;
@@ -269,7 +383,6 @@ void Board::display() {
        label->setGeometry(QRect(40*j,40 * i, 40,40));
        scene->addWidget(label);
        //cout << board->at(i)[j]->display();
-     //  cout << " ";
     }
     cout << endl;
   }
@@ -307,29 +420,13 @@ void Board::moveUp(int x, int y) {
   board->at(x-1)[y]->moveUp();
 }
 
-void Board::moveDiagonalRight(int x, int y) {
-  GamePiece* gp = board->at(x)[y];
-  GamePiece* blank = new GamePiece(x, y, this);
-  board->at(x)[y] = blank;
-  board->at(x+1)[y+1] = gp;
-  board->at(x+1)[y+1]->moveDiagonalRight();
-}
-
-void Board::moveDiagonalLeft(int x, int y) {
-  GamePiece* gp = board->at(x)[y];
-  GamePiece* blank = new GamePiece(x, y, this);
-  board->at(x)[y] = blank;
-  board->at(x+1)[y-1] = gp;
-  board->at(x+1)[y-1]->moveDiagonalLeft();
-}
-
 bool Board::checkLife() {
   if (!board->at(px)[py]->isPlayer()) {
-     board->at(px)[py] = new GamePiece(px, py, this);
-     if (lives == 0) {
+     lives--;
+    // board->at(px)[py] = new GamePiece(px, py, this);
+     if (lives < 0) {
        return true;
      }
-     lives--;
      px = dim - 1;
      py = 5;
      board->at(px)[py] = new Player(px, py, this);
