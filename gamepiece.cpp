@@ -14,7 +14,7 @@ GamePiece::GamePiece(int xLoc, int yLoc, Board* board_) : QLabel() {
 GamePiece::~GamePiece() {}
 
 string GamePiece::display() {
- return "images/tile.png";
+ return "images/stone.png";
 }
 
 bool GamePiece::isCandy() {
@@ -55,16 +55,6 @@ int GamePiece::getY() {
 
 void GamePiece::move() {}
 
-void GamePiece::moveDiagonalRight() {
-  x++;
-  y++;
-}
-
-void GamePiece::moveDiagonalLeft() {
-  x++;
-  y--;
-}
-
 void GamePiece::moveRight() {
   y++;
 }
@@ -82,26 +72,16 @@ void GamePiece::moveUp() {
 }
 
 bool GamePiece::canMoveRight(vector<vector<GamePiece*> >* board) {
-  board->at(x)[y]->display();
+  //board->at(x)[y]->display();
   return true;
 }
 
 bool GamePiece::canMoveLeft(vector<vector<GamePiece*> > *board) {
-  board->at(x)[y]->display();
+  //board->at(x)[y]->display();
  return true;
 }
 
 bool GamePiece::canMoveDown(vector<vector<GamePiece*> > *board) {
-  board->at(x)[y]->display();
-  return true;
-}
-
-bool GamePiece::canMoveDiagonalRight(vector<vector<GamePiece*> > *board) {
-  board->at(x)[y]->display();
-  return true;
-}
-
-bool GamePiece::canMoveDiagonalLeft(vector<vector<GamePiece*> > *board) {
-  board->at(x)[y]->display();
+  //board->at(x)[y]->display();
   return true;
 }

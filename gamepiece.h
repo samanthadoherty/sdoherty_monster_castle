@@ -31,8 +31,6 @@ public:
    virtual void move();
    virtual bool canMoveRight(vector<vector<GamePiece*> > *board);
    virtual bool canMoveLeft(vector<vector<GamePiece*> > *board);
-   virtual bool canMoveDiagonalRight(vector<vector<GamePiece*> > *board);
-   virtual bool canMoveDiagonalLeft(vector<vector<GamePiece*> > *board);
    virtual bool canMoveDown(vector<vector<GamePiece*> > *board);
 
 protected:

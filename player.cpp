@@ -10,7 +10,7 @@ Player::Player(int xLoc, int yLoc, Board* board)
 }
 
 string Player::display() {
-  return "images/warrior1.png";
+  return "images/realplayer.png";
 }
 
 bool Player::isPlayer() {
@@ -23,9 +23,9 @@ bool Player::isSpace() {
 
 bool Player::canMoveRight(vector<vector<GamePiece*> > *board) {
   GamePiece* right = board->at(x)[y+1];
-  return y+1 != dim && !right->isMonster();
+  return y + 1 != dim;
 }
 bool Player::canMoveLeft(vector<vector<GamePiece*> > *board){
   GamePiece* left = board->at(x)[y-1];
-  return y != 0 && !left->isMonster();
+  return y != 0;
 }

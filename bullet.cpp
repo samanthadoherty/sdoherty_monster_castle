@@ -10,7 +10,7 @@ Bullet::Bullet(int xLoc, int yLoc, Board* board)
 }
 
 string Bullet::display() {
-  return "images/bullet1.png";
+  return "images/realbullet.png";
 }
 
 bool Bullet::isBullet() {
