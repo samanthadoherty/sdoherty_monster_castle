@@ -10,7 +10,7 @@ Monster::Monster(int xLoc, int yLoc, Board* board)
 }
 
 string Monster::display() {
-  return "images/monster1.png";
+  return "images/finalmonster.png";
 }
 
 bool Monster::isMonster() {
@@ -25,22 +25,16 @@ bool Monster::canMoveRight(vector<vector<GamePiece*> > *board) {
   if (y + 1 == dim) {
     isMovingRight = false;
   }
-  return y + 1 != dim && isMovingRight && board->at(x)[y+1]->isSpace();
+  return y + 1 != dim && isMovingRight && (board->at(x)[y+1]->isSpace() || 
+     board->at(x)[y+1]->isPlayer() || board->at(x)[y+1]->isCandy() || board->at(x)[y+1]->isDynamite()
+     || board->at(x)[y+1]->isGold());
 }
 
 bool Monster::canMoveLeft(vector<vector<GamePiece*> > *board) {
   if (y == 0) {
     isMovingRight = true;
   }
-  return y != 0 && !isMovingRight && board->at(x)[y-1]->isSpace();
-}
-
-bool Monster::canMoveDiagonalRight(vector<vector<GamePiece*> > *board) {
-  cout << board->at(x)[y]->display() << endl;
-  return false;
-}
-
-bool Monster::canMoveDiagonalLeft(vector<vector<GamePiece*> > *board) {
-  cout << board->at(x)[y]->display() << endl;
-  return false;
+  return y != 0 && !isMovingRight && (board->at(x)[y-1]->isSpace() || 
+     board->at(x)[y-1]->isPlayer() || board->at(x)[y-1]->isCandy() || board->at(x)[y-1]->isDynamite()
+     || board->at(x)[y-1]->isGold());
 }

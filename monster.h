@@ -15,8 +15,6 @@ public:
   bool isSpace();
   bool canMoveRight(vector<vector<GamePiece*> > *board);
   bool canMoveLeft(vector<vector<GamePiece*> > *board);
-  bool canMoveDiagonalRight(vector<vector<GamePiece*> > *board);
-  bool canMoveDiagonalLeft(vector<vector<GamePiece*> > *board);
 private:
   bool isMovingRight;
 };
