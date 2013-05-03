@@ -12,11 +12,11 @@ using namespace std;
 
 MainWindow::MainWindow() 
 {  
-   interval = 10;
+   interval = 250;
    counter = 0;
    isPaused = true;
    timer = new QTimer(this);
-   timer->setInterval(250);
+   timer->setInterval(interval);
    connect(timer, SIGNAL(timeout()), this, SLOT(handleTimer()));
    
    window = new QWidget();
@@ -48,17 +48,20 @@ void MainWindow::handleTimer() {
    int goldA = 15;
    int candyA = 20;
    int dynamiteA = 25;
-   int monsterA = 7;
-
-   if (counter % 50 == 0) {
-      cout << "HERE" << endl;
-      candyA = candyA/2;
-      moveAll = moveAll/2;
-      goldA = goldA/2;
-      dynamiteA = dynamiteA/2;
-      monsterA = monsterA/2;
-   }
+   int monsterA = 5;
+   
    counter++;
+   if (counter % 60 == 0) {
+      cout << "HERE" << endl;
+      timer->setInterval(interval * (.65));
+     // candyA = candyA/2;
+     // cout << candyA;
+      //moveAll = moveAll/2;
+      //cout << moveAll;
+     // goldA = goldA/2;
+     // dynamiteA = dynamiteA/2;
+      //monsterA = monsterA/2;
+   }
    if (counter % moveAll == 0) {
      //board->moveMonster();
      board->moveGold();
@@ -188,6 +191,8 @@ void MainWindow::handleRestart() {
    Board* temp = board;
    board = new Board(scene);
    delete temp;
+   interval = 250;
+   timer->setInterval(interval);
    timer->start();
    board->display();
 }
@@ -237,7 +242,7 @@ void MainWindow::handlePause() {
 
 void MainWindow::handleHowTo() {
    QMessageBox *msgBox = new QMessageBox();
-   msgBox->setText("How to Play the Game:\n\n1. Use the left and right arrow keys to move player.\n\n2. Goal is to get as many points as by possible by moving your player back and forth to collect pots of gold (worth 100 points) as they move across the screen.\n\n3. Be careful though! You only get 3 lives to start with and if you run into any of the monsters that will also be moving across the board, you die. If you collect a piece of candy though, you gain one life. The game will end when you have zero lives left.\n\n4. If you press the 'Shoot' button and hit a monster with your bullet, you gain 500 points and the monster dies! 5. Also, if you run into a stick of dynamite, the game automatically ends regardless of how many lives you have left.\n\n6. The game will start to speed up after a while, so collect points while you can!\n\n7. You may pause, restart, or quit the game at any time.\n\nReady?");
+   msgBox->setText("How to Play the Game:\n\n1. Use the left and right buttons to move player.\n\n2. Goal is to get as many points as by possible by moving your player back and forth to collect pots of gold (worth 100 points) as they move across the screen.\n\n3. Be careful though! You only get 3 lives to start with and if you run into any of the monsters that will also be moving across the board, you die. If you collect a piece of candy though, you gain one life. The game will end when you have zero lives left.\n\n4. If you press the 'Shoot' button and hit a monster with your bullet, you gain 500 points and the monster dies! \n\n5. Also, if you run into a stick of dynamite, the game automatically ends regardless of how many lives you have left.\n\n6. The game will start to speed up after a while, so collect points while you can!\n\n7. You may pause, restart, or quit the game at any time.\n\nReady?");
    msgBox->show();
 }
 

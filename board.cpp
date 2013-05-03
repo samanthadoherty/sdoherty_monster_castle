@@ -170,9 +170,9 @@ void Board:: moveMonsterDown() {
        if (monster->getY() == py && monster->getX() + 1 == px) {
            lives--;
            px = dim - 1;
-           py = 5;
-           board->at(px)[py] = new Player(px, py, this);
+           py = 5;          
            board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
+           board->at(px)[py] = new Player(px, py, this);
            removeMonster(monster->getX(), monster->getY());
            GamePiece* gp = new GamePiece(monster->getX(), monster->getY(), this);
            board->at(monster->getX())[monster->getY()] = gp;
@@ -182,13 +182,11 @@ void Board:: moveMonsterDown() {
            board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
            removeCandy(monster->getX() + 1, monster->getY());
            moveRight(monster->getX(), monster->getY());
-
         }
         else if (board->at(monster->getX() + 1)[monster->getY()]->isGold()) {
            board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
            removeGold(monster->getX() + 1, monster->getY()); 
            moveRight(monster->getX(), monster->getY());
-
         }
         else if (board->at(monster->getX() + 1)[monster->getY()]->isDynamite()) {
            board->at(monster->getX() + 1)[monster->getY()] = new GamePiece(monster->getX() + 1, monster->getY(), this);
