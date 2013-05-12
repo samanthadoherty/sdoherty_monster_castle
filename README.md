@@ -23,3 +23,8 @@ doxygen config.txt
 #Command to run
 ./game_sdoherty
 ```
+
+### License
+https://github.com/samanthadoherty/sdoherty_monster_castle/blob/master/LICENSE
+
+
