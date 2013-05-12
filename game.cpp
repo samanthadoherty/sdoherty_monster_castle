@@ -7,6 +7,12 @@
 
 using namespace std;
 
+/** Instantiates a QApplication object as well as a Mainmenu object
+*   Calls functions to show buttons and show mainmenu
+*   @param int argc, the number of arguments in the command line
+*   @param char *argv[], a char array of the arguments
+*   @returns a.exec(), which executes the graphical user interface
+*/
 int main (int argc, char *argv[]) {
  
    QApplication a(argc, argv);

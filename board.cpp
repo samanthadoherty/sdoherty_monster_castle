@@ -2,8 +2,13 @@
 
 using namespace std;
 
+/** Default constructor */
 Board::Board() {}
 
+/** Constructor to initialize graphics scene, dim, lives, score, and coordinates
+*   of player
+*   @param QGraphicScene* scene_, what the user will see
+*/
 Board::Board(QGraphicsScene* scene_) {
    px = 9; py = 5;
    dim = 10;
@@ -31,6 +36,8 @@ Board::Board(QGraphicsScene* scene_) {
    board->at(px)[py] = player;
 }
 
+/** Resets each vector by clearing it, which removes all items from the board
+*/
 void Board::resetList() {
   for (int i = 0; i < dim; i++) {
      for (int j = 0; j < dim; j++) {
@@ -55,6 +62,11 @@ void Board::resetList() {
      }
    }
 }
+
+/** Uses candyList vector to find position of candy and move it down, if
+*   candy is able to move down (nothing is in it's way)
+*   Accounts for when candy runs into player and increases lives by 1
+*/
 void Board::moveCandy() {
    for (unsigned int i = 0; i < candyList->size(); i++) {
      GamePiece* candy = candyList->at(i);
@@ -75,6 +87,10 @@ void Board::moveCandy() {
   }
 }
 
+/** Uses goldList vector to find position of gold and move it down, if
+*   gold is able to move down (nothing is in it's way)
+*   Accounts for when gold runs into player and increases score by 100
+*/
 void Board::moveGold() {
    for (unsigned int i = 0; i < goldList->size(); i++) {
      GamePiece* gold = goldList->at(i);
@@ -96,6 +112,10 @@ void Board::moveGold() {
   }
 } 
 
+/** Uses monsterList vector to find position of monster and move it horizontal
+*   Accounts for when monster runs into other objects, which causes those
+*   objects to disappear and be removed
+*/
 void Board::moveMonster() {
    for (unsigned int i = 0; i < monsterList->size(); i++) {
      GamePiece* monster = monsterList->at(i);
@@ -162,6 +182,10 @@ void Board::moveMonster() {
    }
 }
 
+/** Uses monsterList vector to find position of monster and move it down
+*   If object is below monster, function accounts for collisions into each
+*   type of object, including player (subtract a life)
+*/
 void Board:: moveMonsterDown() {
    for (unsigned int i = 0 ; i < monsterList->size(); i++) {
      GamePiece* monster = monsterList->at(i);
@@ -204,6 +228,10 @@ void Board:: moveMonsterDown() {
    }
 } 
 
+/** Uses bulletList vector to find position of bullet and move it up
+*   If bullet runs into something, that object and the bullet will disappear
+*   If the object is a monster, player gains 500 points
+*/
 void Board::moveBullet() {
   for (unsigned int i = 0; i < bulletList->size(); i++) {
     GamePiece* bullet = bulletList->at(i);
@@ -244,6 +272,12 @@ void Board::moveBullet() {
   
 }
 
+/** Uses dynamiteList vector to find position of dynamite and move it down, if
+*   dynamite is able to move down (nothing is in it's way)
+*   Accounts for when dynamite reaches bottom of screen and explodes,
+*   causing everything around it to disappear and the game to end
+*   if player is nearby
+*/
 void Board::moveDynamite() {
    for (unsigned int i = 0; i < dynamiteList->size(); i++) {
       GamePiece* dynamite = dynamiteList->at(i);
@@ -274,6 +308,11 @@ void Board::moveDynamite() {
    }
 }
 
+/** Removes current candy object from its vector, needed when it runs into
+*   another object or reaches bottom of screen
+*   @param int x, the x coordinate of candy object
+*   @param int y, the y coordinate of candy object
+*/
 void Board::removeCandy(int x, int y) {
   for (unsigned int i = 0; i < candyList->size(); i++) {
     GamePiece* candy = candyList->at(i);
@@ -283,6 +322,11 @@ void Board::removeCandy(int x, int y) {
   }
 }
  
+/** Removes current gold object from its vector, needed when it runs into
+*   another object or reaches bottom of screen
+*   @param int x, the x coordinate of gold object
+*   @param int y, the y coordinate of gold object
+*/
 void Board::removeGold(int x, int y) {
   for (unsigned int i = 0; i < goldList->size(); i++) {
     GamePiece* gold = goldList->at(i);
@@ -292,6 +336,11 @@ void Board::removeGold(int x, int y) {
   }
 } 
 
+/** Removes current bullet object from its vector, needed when it runs into
+*   another object or reaches top of screen
+*   @param int x, the x coordinate of bullet object
+*   @param int y, the y coordinate of bullet object
+*/
 void Board::removeBullet(int x, int y) {
   for (unsigned int i = 0; i < bulletList->size(); i++) {
     GamePiece* bullet = bulletList->at(i);
@@ -301,6 +350,10 @@ void Board::removeBullet(int x, int y) {
   }
 }
 
+/** Removes current monster object from its vector, needed when it reaches bottom of screen
+*   @param int x, the x coordinate of monster object
+*   @param int y, the y coordinate of monster object
+*/
 void Board::removeMonster(int x, int y) {
   for (unsigned int i = 0; i < monsterList->size(); i++) {
     GamePiece* monster = monsterList->at(i);
@@ -310,6 +363,11 @@ void Board::removeMonster(int x, int y) {
   }
 }
 
+/** Removes current dynamite object from its vector, needed when it runs into
+*   another object or reaches bottom of screen
+*   @param int x, the x coordinate of dynamite object
+*   @param int y, the y coordinate of dynamite object
+*/
 void Board::removeDynamite(int x, int y) {
   for (unsigned int i = 0; i < dynamiteList->size(); i++) {
     GamePiece* dynamite = dynamiteList->at(i);
@@ -319,6 +377,9 @@ void Board::removeDynamite(int x, int y) {
   }
 }
 
+/** Used when timer reaches certain interval, adds gold object to a random
+*   location at top of screen
+*/
 void Board::addGold() {
   int y = rand() % (dim-1);
   GamePiece* gold = new Gold(0, y, this);
@@ -326,6 +387,9 @@ void Board::addGold() {
   goldList->push_back(gold);  
 }
 
+/** Used when timer reaches certain interval, adds dynamite object to a random
+*   location at top of screen
+*/
 void Board::addDynamite() {
   int y = rand() % (dim-1);
   GamePiece* dynamite = new Dynamite(0, y, this);
@@ -333,13 +397,19 @@ void Board::addDynamite() {
   dynamiteList->push_back(dynamite); 
 }
 
+/** Used when timer reaches certain interval, adds candy object to a random
+*   location at top of screen
+*/
 void Board::addCandy() {
   int y = rand() % (dim-1);
   GamePiece* candy = new Candy(0, y, this);
   board->at(0)[y] = candy;
   candyList->push_back(candy);
 }
-  
+
+/** Used when timer reaches certain interval, adds monster object to a random
+*   location at top of screen
+*/  
 void Board::addMonster() {
   int y = rand() % (dim-1);
   GamePiece* monster = new Monster(0, y, this);
@@ -347,6 +417,9 @@ void Board::addMonster() {
   monsterList->push_back(monster);
 }
 
+/** This keeps generating a new bullet as it moves and deallocating the old
+*   one
+*/
 void Board::shoot() {
   if (!board->at(px-1)[py]->isBullet()) {
     GamePiece* bullet = new Bullet(px-1, py, this);
@@ -355,6 +428,9 @@ void Board::shoot() {
   }
 }
  
+/** This keeps track of when the user presses the left pushbutton, and
+*   moves the player one space to the left accordingly
+*/
 void Board::movePlayerLeft() {
    GamePiece* player = board->at(px)[py];
    if (player->canMoveLeft(board)) {
@@ -363,6 +439,9 @@ void Board::movePlayerLeft() {
    }
 }
 
+/** This keeps track of when the user presses the right pushbutton, and
+*   moves the player one space to the right accordingly
+*/
 void Board::movePlayerRight() {
    GamePiece* player = board->at(px)[py];
    if (player->canMoveRight(board)) {
@@ -371,6 +450,9 @@ void Board::movePlayerRight() {
    }
 }  
 
+/** This displays the current board and all the objects present on it by
+*   iterating through all parts of the board
+*/
 void Board::display() {  
   for (int i = 0; i < dim; i++) {
     for (int j = 0; j < dim; j++) {
@@ -380,12 +462,15 @@ void Board::display() {
        label->setPixmap(QPixmap::fromImage(image));
        label->setGeometry(QRect(40*j,40 * i, 40,40));
        scene->addWidget(label);
-       //cout << board->at(i)[j]->display();
     }
     cout << endl;
   }
 }
 
+/** This function is called to move a piece to the right on the board
+*   @param int x, the current x coordinate of the object
+*   @param int y, the current y coordinate of the object
+*/
 void Board::moveRight(int x, int y) {
   GamePiece* gp = board->at(x)[y];
   GamePiece* blank = new GamePiece(x, y, this);
@@ -394,6 +479,10 @@ void Board::moveRight(int x, int y) {
   board->at(x)[y+1]->moveRight();
 }
 
+/** This function is called to move a piece to the left on the board
+*   @param int x, the current x coordinate of the object
+*   @param int y, the current y coordinate of the object
+*/
 void Board::moveLeft(int x, int y) {
   GamePiece* gp = board->at(x)[y];
   GamePiece* blank = new GamePiece(x, y, this);
@@ -402,6 +491,10 @@ void Board::moveLeft(int x, int y) {
   board->at(x)[y-1]->moveLeft();
 }
 
+/** This function is called to move a piece down the board
+*   @param int x, the current x coordinate of the object
+*   @param int y, the current y coordinate of the object
+*/
 void Board::moveDown(int x, int y) {
   GamePiece* gp = board->at(x)[y];
   GamePiece* blank = new GamePiece(x, y, this);
@@ -410,6 +503,10 @@ void Board::moveDown(int x, int y) {
   board->at(x+1)[y]->moveDown();
 }
 
+/** This function is called to move a piece up the board
+*   @param int x, the current x coordinate of the object
+*   @param int y, the current y coordinate of the object
+*/
 void Board::moveUp(int x, int y) {
   GamePiece* gp = board->at(x)[y];
   GamePiece* blank = new GamePiece(x, y, this);
@@ -418,10 +515,14 @@ void Board::moveUp(int x, int y) {
   board->at(x-1)[y]->moveUp();
 }
 
+/** This is called when a life is lost to subtract the life and
+*   reset the player at its starting location
+*   @returns true if lives are at 0 to indicate that the game should end
+*   @returns false if the player still has more lives left
+*/
 bool Board::checkLife() {
   if (!board->at(px)[py]->isPlayer()) {
      lives--;
-    // board->at(px)[py] = new GamePiece(px, py, this);
      if (lives < 0) {
        return true;
      }
@@ -432,20 +533,23 @@ bool Board::checkLife() {
   }
   return false;
 }
-  
+ 
+/** @returns monsterList->size(), the number of monsters on the board */ 
 int Board::getNumMonsters() {
   return monsterList->size();
 }
-     
+
+/** @returns dim, the dimensions of the board */     
 int Board::getDim() {
   return dim;
 }
 
+/** @returns score, the score the player currently has */
 int Board::getScore() {
   return score;
 }
 
+/** @returns lives, the number of lives the player currently has */
 int Board::getLives() {
   return lives;
 }
-   

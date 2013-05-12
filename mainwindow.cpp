@@ -10,6 +10,9 @@
 
 using namespace std;
 
+/** Constructor for MainWindow that sets the timer, creates the window, scene, and view, as well
+*   as adds the layouts and pushbuttons to the screen
+*/
 MainWindow::MainWindow() 
 {  
    interval = 250;
@@ -40,9 +43,14 @@ MainWindow::MainWindow()
    board->display();  
 }
 
+/** MainWindow destructor */
 MainWindow::~MainWindow() {
 }
 
+/** When the timer goes off at each interval, this slot is called
+*   It moves each object every time the counter hits a certain integer
+*   Counter is incremented every time this function is called
+*/
 void MainWindow::handleTimer() {
    int moveAll = 2;
    int goldA = 15;
@@ -54,16 +62,8 @@ void MainWindow::handleTimer() {
    if (counter % 60 == 0) {
       cout << "HERE" << endl;
       timer->setInterval(interval * (.65));
-     // candyA = candyA/2;
-     // cout << candyA;
-      //moveAll = moveAll/2;
-      //cout << moveAll;
-     // goldA = goldA/2;
-     // dynamiteA = dynamiteA/2;
-      //monsterA = monsterA/2;
    }
    if (counter % moveAll == 0) {
-     //board->moveMonster();
      board->moveGold();
      board->moveDynamite();
      board->moveCandy();
@@ -105,6 +105,9 @@ void MainWindow::handleTimer() {
    scoreBox->setText(score);
 }
 
+/** When player has lost all his lives, this function is called, which instantiates a message box
+*   stating the player's score and giving him options to continue
+*/
 void MainWindow::gameOver() {
    QMessageBox *game = new QMessageBox();
    QString msg = ("GAME OVER\n\nYour score was: ");
@@ -117,6 +120,7 @@ void MainWindow::gameOver() {
    game->show();
 }
 
+/** This function creates the main pushbuttons, including start game, pause, and restart */
 void MainWindow::addPushButtons() {
    QPushButton *start = new QPushButton("Start Game");
    startLayout->addWidget(start);
@@ -129,6 +133,7 @@ void MainWindow::addPushButtons() {
    connect(restart, SIGNAL(clicked()), this, SLOT(handleRestart()));
 }
 
+/** This function adds the howTo button and the quit button */
 void MainWindow::addBottomButtons() {
    QPushButton *howTo = new QPushButton("How to Play");
    bottomLayout->addWidget(howTo);
@@ -143,26 +148,11 @@ void MainWindow::keyPressEvent(QKeyEvent *keyEvent) {
    if (keyEvent->key() == Qt::Key_Left) {
       cout << "key";
    }
-}
-
-/*bool MainWindow::eventFilter(QObject *obj, QEvent *event) {
-   QKeyEvent *keyEvent = NULL;
-   bool result = false;
-   if (event->type() == QEvent::KeyPress) {
-      keyEvent = dynamic_cast<QKeyEvent*>(event);
-      this->keyPressEvent(keyEvent);
-      result = true;
-   }
-   else if (event->type() == QEvent::KeyRelease) {
-      keyEvent = dynamic_cast<QKeyEvent*>(event);
-      this->keyReleaseEvent(keyEvent);
-      result = true;
-   }
-   else
-      result = QObject::eventFilter(obj, event);
-   return result;
-} */  
-  
+} 
+ 
+/** This button implements the left and right pushbuttons that allow the player to move back and forth
+*   It also creates the shoot button so the user can shoot monsters with the bullet
+*/
 void MainWindow::addMoveButtons() {
    QPushButton *left = new QPushButton("Left");
    moveLayout->addWidget(left);
@@ -175,6 +165,7 @@ void MainWindow::addMoveButtons() {
    connect(shoot, SIGNAL(clicked()), this, SLOT(handleShoot()));
 }
 
+/** This function adds the boxes that display the player's name, score and number of lives left */
 void MainWindow::addTextBoxes(QString name) {
     nameBox = new QTextEdit(name);
     textLayout->addWidget(nameBox);
@@ -184,6 +175,9 @@ void MainWindow::addTextBoxes(QString name) {
     textLayout->addWidget(livesBox);
 }
 
+/** When restart is pushed, this slot is called, which deletes all the items in the scene as a way 
+*   of refreshing the board, stops the timer, creates a new board, and restarts the timer
+*/
 void MainWindow::handleRestart() {
   // isPaused = true;
    timer->stop();
@@ -197,6 +191,7 @@ void MainWindow::handleRestart() {
    board->display();
 }
 
+/** If the user hits the left pushbutton, this slot is called, which allows the player to move left */
 void MainWindow::handleLeft() {
    if (!isPaused) {
      board->movePlayerLeft();
@@ -204,7 +199,9 @@ void MainWindow::handleLeft() {
    }
 }
 
-
+/** If the start button is pushed, this function is called, which starts the timer and adds the first
+*   monster to get the game started
+*/
 void MainWindow::handleStart() {
    if (isPaused) {
      isPaused = false;
@@ -213,6 +210,7 @@ void MainWindow::handleStart() {
    }
 }
 
+/** If the user hits the right pushbutton, this slot is called, which allows the player to move right */
 void MainWindow::handleRight() {
    if (!isPaused) {
      board->movePlayerRight();
@@ -220,6 +218,7 @@ void MainWindow::handleRight() {
    }
 }
 
+/** If the user presses the shoot button, this function is called, which causes a bullet to appear */
 void MainWindow::handleShoot() {
   if (!isPaused) {
     board->shoot();
@@ -227,12 +226,14 @@ void MainWindow::handleShoot() {
   }
 }
 
+/** If the user hits the pause buttons, this slot is called that creates a message box stating that the
+*   game is paused and tells the player what they can do to start it again
+*   Also stops the timer
+*/
 void MainWindow::handlePause() {
    QMessageBox *pauseMsg = new QMessageBox();
    pauseMsg->setText("Your game has been paused. Press 'Start Game' on the main window to continue");
    if (isPaused) {
-    // isPaused = false;
-    // timer->start();
    } else {
      isPaused = true;     
      pauseMsg->show();
@@ -240,12 +241,16 @@ void MainWindow::handlePause() {
    }
 }
 
+/** If the player hits the how to button, this slot makes a message box appear detailing all the things
+*   the user needs to know to play the game
+*/
 void MainWindow::handleHowTo() {
    QMessageBox *msgBox = new QMessageBox();
    msgBox->setText("How to Play the Game:\n\n1. Use the left and right buttons to move player.\n\n2. Goal is to get as many points as by possible by moving your player back and forth to collect pots of gold (worth 100 points) as they move across the screen.\n\n3. Be careful though! You only get 3 lives to start with and if you run into any of the monsters that will also be moving across the board, you die. If you collect a piece of candy though, you gain one life. The game will end when you have zero lives left.\n\n4. If you press the 'Shoot' button and hit a monster with your bullet, you gain 500 points and the monster dies! \n\n5. Also, if you run into a stick of dynamite, the game automatically ends regardless of how many lives you have left.\n\n6. The game will start to speed up after a while, so collect points while you can!\n\n7. You may pause, restart, or quit the game at any time.\n\nReady?");
    msgBox->show();
 }
 
+/** If the user hits the quit button, this slot causes the game to exit immediately */
 void MainWindow::quit() {
    exit (EXIT_FAILURE);
 }
